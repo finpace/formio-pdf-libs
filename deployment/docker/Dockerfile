@@ -1,5 +1,5 @@
 FROM node:20-bookworm-slim
-LABEL maintainer="Form.io <support@form.io>"
+LABEL maintainer="Finpace <abhi@finpace.com>"
 
 # Set installation environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -88,7 +88,3 @@ RUN rm -f /etc/apt/sources.list \
     && apt-get autoremove -y  \
     && apt-get remove wget -y \
     && apt-get remove git -y
-
-EXPOSE ${PORT}
-
-CMD [ "node", "main.js" ]
