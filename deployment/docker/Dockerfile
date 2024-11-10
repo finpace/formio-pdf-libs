@@ -60,11 +60,6 @@ RUN yarn install --production --frozen-lockfile
 COPY src ./src
 COPY *.js ./
 
-COPY test ./test
-
-# Add docs
-COPY docs ./docs
-
 ENV APP_ROOT=/usr/src/pdf-libs
 WORKDIR $APP_ROOT
 
