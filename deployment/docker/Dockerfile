@@ -12,7 +12,7 @@ RUN echo "deb http://deb.debian.org/debian/ bookworm main contrib non-free" > /e
     && echo "deb http://security.debian.org/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list \
     && echo "deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free" >> /etc/apt/sources.list \
     && apt-get update \
-    && apt-get upgrade \
+    && apt-get upgrade -y \
     # Disable EULA agreement for msttcorefonts
     && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections \
     # Dependencies
@@ -28,12 +28,12 @@ RUN echo "deb http://deb.debian.org/debian/ bookworm main contrib non-free" > /e
     poppler-utils \
     ghostscript \
     git \
-    sudo \
+    sudo
     # Fonts
-    && wget https://github.com/google/fonts/archive/main.tar.gz -O gf.tar.gz \
-    && tar -xf gf.tar.gz \
-    && mkdir -p /usr/share/fonts/truetype/google-fonts \
-    && find ./fonts-main/ -name "*.ttf" -exec install -m644 {} /usr/share/fonts/truetype/google-fonts/ \; || return 1
+    # && wget https://github.com/google/fonts/archive/main.tar.gz -O gf.tar.gz \
+    # && tar -xf gf.tar.gz \
+    # && mkdir -p /usr/share/fonts/truetype/google-fonts \
+    # && find ./fonts-main/ -name "*.ttf" -exec install -m644 {} /usr/share/fonts/truetype/google-fonts/ \; || return 1
 
 # Install pdf2htmlEX
 RUN apt-get update \
@@ -67,10 +67,10 @@ ENV APP_ROOT=/usr/src/pdf-libs
 WORKDIR $APP_ROOT
 
 # Build extract-formfields tool
-COPY cpp ./cpp
-ARG EXTRACT_FORMFIELDS_ROOT=$APP_ROOT/cpp/extract-formfields
-WORKDIR $EXTRACT_FORMFIELDS_ROOT
-RUN ${EXTRACT_FORMFIELDS_ROOT}/build.sh
+# COPY cpp ./cpp
+# ARG EXTRACT_FORMFIELDS_ROOT=$APP_ROOT/cpp/extract-formfields
+# WORKDIR $EXTRACT_FORMFIELDS_ROOT
+# RUN ${EXTRACT_FORMFIELDS_ROOT}/build.sh
 WORKDIR $APP_ROOT
 
 # Set runtime environment variables
@@ -82,7 +82,7 @@ ENV EXTRACT_FORMFIELDS=$EXTRACT_FORMFIELDS_ROOT/bin/extract-formfields \
 RUN rm -f /etc/apt/sources.list \
     && apt-get clean  \
     && rm -f gf.tar.gz  \
-    && rm -rf /fonts-main  \
+    # && rm -rf /fonts-main  \
     && apt-get autoremove -y  \
     && apt-get remove wget -y \
     && apt-get remove git -y
