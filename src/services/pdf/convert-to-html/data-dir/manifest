@@ -39,7 +39,7 @@ $css
 # Do not modify
 """
 <title></title>
-<link rel="stylesheet" type="text/css" href="https://form.io/pdf/dist/formio-pdf.min.css"></link>
+<link rel="stylesheet" type="text/css" href="https://dev-cdn.finpace.com/public/pdf.css"></link>
 </head>
 <body>
 """
@@ -60,8 +60,7 @@ $pages
 # Do not modify
 """
 </body>
-<script src="https://form.io/pdf/dist/formio-pdf.min.js"></script>
-<script src="https://unpkg.com/seamless@latest/build/seamless.child.min.js"></script>
+<script src="https://dev-cdn.finpace.com/public/pdf2.js"></script>
 </html>
 """
 
