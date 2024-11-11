@@ -1,10 +1,9 @@
 import { convertToHtml } from "./src/handlers/pdf/convert-to-html.js";
 import fs from "fs";
+import { dirname } from 'path';
 import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const client = new S3Client({ region: "us-east-1" });
-
-console.log("Hello from Lambda!");
 
 const getFileFromS3 = async (Bucket, Key) => {
   const params = {
@@ -27,6 +26,7 @@ export const handler = async (event) => {
 
   // write to lambda temp dir
   const filePath = `/tmp/${Key}`;
+  fs.mkdirSync(dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, file);
 
   const { outputFile } = await convertToHtml(filePath);

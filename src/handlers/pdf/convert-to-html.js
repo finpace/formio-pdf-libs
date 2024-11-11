@@ -3,8 +3,6 @@ import fs from "fs";
 import { v4 as uuid } from "uuid";
 import { tmpdir } from "os";
 
-console.log("tmpdir", tmpdir());
-
 import { htmlGenerationTimeoutConfig } from "../../../config.js";
 import { generateHtml } from "../../services/pdf/convert-to-html/generate-html.js";
 
