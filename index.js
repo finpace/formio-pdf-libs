@@ -12,7 +12,7 @@ const getFileFromS3 = async (Bucket, Key) => {
     Key,
   };
   const res = await client.send(new GetObjectCommand(params));
-  return res.Body;
+  return res.Body.transformToByteArray();
 };
 
 export const handler = async (event) => {
