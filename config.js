@@ -1,5 +1,3 @@
-'use strict';
-
 /* eslint-disable no-console */
 
 import dotenv from 'dotenv';

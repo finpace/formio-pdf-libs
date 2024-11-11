@@ -1,7 +1,7 @@
 import { tmpdir } from 'os';
 import { join } from 'path';
 import { v4 as uuid } from 'uuid';
-import { psToPdf } from '../../services/pdf/convert-to-html';
+import { psToPdf } from '../../services/pdf/convert-to-html/ps-to-pdf.js';
 
 export const optimizePdf = (req, __res, next) => {
   req.debug('Optimizing PDF');

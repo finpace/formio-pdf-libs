@@ -1,4 +1,4 @@
-import { convertToHtml } from "./src/handlers/pdf/convert-to-html";
+import { convertToHtml } from "./src/handlers/pdf/convert-to-html.js";
 import fs from "fs";
 import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 

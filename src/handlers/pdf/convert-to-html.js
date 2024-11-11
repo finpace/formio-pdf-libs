@@ -5,8 +5,8 @@ import { tmpdir } from "os";
 
 console.log("tmpdir", tmpdir);
 
-import { generateHtml } from "../../services/pdf/convert-to-html";
-import { htmlGenerationTimeoutConfig } from "../../../config";
+import { htmlGenerationTimeoutConfig } from "../../../config.js";
+import { generateHtml } from "../../services/pdf/convert-to-html/generate-html.js";
 
 export const convertToHtml = async (filePath, optimizedPdf = false) => {
   const outputFileName = `${uuid()}.html`;

@@ -1,5 +1,5 @@
-import { pdf2htmlexPath } from "../../../../config";
-import { exec } from "../../../utils";
+import { pdf2htmlexPath } from "../../../../config.js";
+import { exec } from "../../../utils/exec.js";
 
 export const generateHtml = async (filePath, toFile, params, commands, timeout) => {
   const { zoom, dpi } = params;
