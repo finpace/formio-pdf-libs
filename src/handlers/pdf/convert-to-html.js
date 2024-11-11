@@ -17,7 +17,7 @@ export const convertToHtml = async (filePath, optimizedPdf = false) => {
         zoom: 1.78,
         dpi: 144,
       },
-      ["--dest-dir", tmpdir],
+      ["--dest-dir", "/tmp"],
       calculatedTimeout
     );
   } catch (err) {
