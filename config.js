@@ -20,13 +20,6 @@ if (!psToPdfPath) {
   process.exit(1);
 }
 
-const extractFormfieldsPath = process.env.EXTRACT_FORMFIELDS;
-
-if (!extractFormfieldsPath) {
-  console.error('EXTRACT_FORMFIELDS must be provided');
-  process.exit(1);
-}
-
 const hideFormfieldsPath = process.env.HIDE_FORMFIELDS;
 
 // 7 seconds (and then 30 seconds) seems like a sensible default I guess? We don't want PDFs
@@ -39,7 +32,6 @@ const htmlGenerationTimeoutConfig = {
 
 module.exports = {
   port,
-  extractFormfieldsPath,
   pdf2htmlexPath,
   psToPdfPath,
   hideFormfieldsPath,

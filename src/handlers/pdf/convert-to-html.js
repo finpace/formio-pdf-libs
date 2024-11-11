@@ -1,40 +1,33 @@
-'use strict';
+const path = require("path");
+const fs = require("fs");
+const { v4: uuid } = require("uuid");
+const tmpdir = require("os").tmpdir();
 
-const path = require('path');
-const {v4: uuid} = require('uuid');
-const tmpdir = require('os').tmpdir();
+console.log("tmpdir", tmpdir);
 
-const {generateHtml} = require('../../services/pdf/convert-to-html');
-const {htmlGenerationTimeoutConfig} = require('../../../config');
+const { generateHtml } = require("../../services/pdf/convert-to-html");
+const { htmlGenerationTimeoutConfig } = require("../../../config");
 
-const convertToHtml = async (req, res, next) => {
+const convertToHtml = async (filePath, optimizedPdf = false) => {
   const outputFileName = `${uuid()}.html`;
   const outputPath = path.join(tmpdir, `${outputFileName}`);
-  req.cleanup.push(outputPath);
-  const {timeout, backoff} = htmlGenerationTimeoutConfig;
-  const calculatedTimeout = req.optimizedPdf ? timeout + backoff : timeout;
+  const { timeout, backoff } = htmlGenerationTimeoutConfig;
+  const calculatedTimeout = optimizedPdf ? timeout + backoff : timeout;
   try {
     await generateHtml(
-      req.filePath,
+      filePath,
       outputFileName,
       {
-        zoom: req.query.zoom || 1.78,
-        dpi: req.query.dpi || 144
+        zoom: 1.78,
+        dpi: 144,
       },
-      ['--dest-dir', tmpdir],
+      ["--dest-dir", tmpdir],
       calculatedTimeout
     );
+  } catch (err) {
+    console.error("error while generating html", err);
   }
-  catch (err) {
-    return req.optimizedPdf
-      ? next(err)
-      : next();
-  }
-  return res.sendFile(outputPath, (err) => {
-    if (err) {
-      req.debug(err);
-    }
-  });
+  return fs.readFileSync(outputPath, "utf8");
 };
 
-module.exports = {convertToHtml};
+module.exports = { convertToHtml };
