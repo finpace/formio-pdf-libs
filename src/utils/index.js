@@ -1,5 +1,3 @@
-'use strict';
+import { exec } from './exec';
 
-module.exports = {
-  ...require('./exec'),
-};
+export { exec };

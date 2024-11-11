@@ -1,14 +1,11 @@
-'use strict';
+import { tmpdir } from 'os';
+import { join } from 'path';
+import { v4 as uuid } from 'uuid';
+import { psToPdf } from '../../services/pdf/convert-to-html';
 
-const os = require('os');
-const path = require('path');
-const {v4: uuid} = require('uuid');
-const {psToPdf} = require('../../services/pdf/convert-to-html');
-
-const optimizePdf = (req, __res, next) => {
+export const optimizePdf = (req, __res, next) => {
   req.debug('Optimizing PDF');
-  const outputPath = path.join(os.tmpdir(), `${uuid()}.pdf`);
-  req.cleanup.push(outputPath);
+  const outputPath = join(tmpdir(), `${uuid()}.pdf`);
   psToPdf(req.filePath, outputPath, (err, filePath) => {
     if (err) {
       return next(err);
@@ -21,5 +18,3 @@ const optimizePdf = (req, __res, next) => {
     next();
   });
 };
-
-module.exports = {optimizePdf};

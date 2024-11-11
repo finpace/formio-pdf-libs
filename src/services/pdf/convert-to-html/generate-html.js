@@ -1,10 +1,8 @@
-'use strict';
+import { pdf2htmlexPath } from "../../../../config";
+import { exec } from "../../../utils";
 
-const {pdf2htmlexPath} = require('../../../../config');
-const {exec} = require('../../../utils');
-
-const generateHtml = async (filePath, toFile, params, commands, timeout) => {
-  const {zoom, dpi} = params;
+export const generateHtml = async (filePath, toFile, params, commands, timeout) => {
+  const { zoom, dpi } = params;
   const args = commands.concat([
     '--no-drm',
     '1',
@@ -21,7 +19,5 @@ const generateHtml = async (filePath, toFile, params, commands, timeout) => {
     filePath,
     toFile
   ]);
-  await exec(`${pdf2htmlexPath} ${args.join(' ')}`, {timeout});
+  await exec(`${pdf2htmlexPath} ${args.join(' ')}`, { timeout });
 };
-
-module.exports = {generateHtml};

@@ -1,7 +1,4 @@
-'use strict';
+import util from 'util';
+import { exec as execCallback } from 'child_process';
 
-const util = require('util');
-
-module.exports = {
-  exec: util.promisify(require('child_process').exec)
-};
+export const exec = util.promisify(execCallback);

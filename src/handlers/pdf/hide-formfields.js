@@ -1,19 +1,17 @@
-'use strict';
+import { join } from 'path';
+import { tmpdir } from 'os';
+import { v4 as uuid } from 'uuid';
 
-const path = require('path');
-const os = require('os');
-const {v4: uuid} = require('uuid');
-
-const config = require('../../../config');
-const {exec} = require('../../utils');
+import { hideFormfieldsPath } from '../../../config';
+import { exec } from '../../utils';
 
 const hideFormfields = async (req, __res, next) => {
-  const outputPath = path.join(os.tmpdir(), `${uuid()}.pdf`);
+  const outputPath = join(tmpdir(), `${uuid()}.pdf`);
   req.cleanup.push(outputPath);
 
-  await exec(`${config.hideFormfieldsPath} ${req.filePath} ${outputPath}`);
+  await exec(`${hideFormfieldsPath} ${req.filePath} ${outputPath}`);
   req.filePath = outputPath;
   next();
 };
 
-module.exports = {hideFormfields};
+export default {hideFormfields};

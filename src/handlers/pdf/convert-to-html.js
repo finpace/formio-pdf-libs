@@ -1,14 +1,14 @@
-const path = require("path");
-const fs = require("fs");
-const { v4: uuid } = require("uuid");
-const tmpdir = require("os").tmpdir();
+import path from "path";
+import fs from "fs";
+import { v4 as uuid } from "uuid";
+import { tmpdir } from "os";
 
 console.log("tmpdir", tmpdir);
 
-const { generateHtml } = require("../../services/pdf/convert-to-html");
-const { htmlGenerationTimeoutConfig } = require("../../../config");
+import { generateHtml } from "../../services/pdf/convert-to-html";
+import { htmlGenerationTimeoutConfig } from "../../../config";
 
-const convertToHtml = async (filePath, optimizedPdf = false) => {
+export const convertToHtml = async (filePath, optimizedPdf = false) => {
   const outputFileName = `${uuid()}.html`;
   const outputPath = path.join(tmpdir, `${outputFileName}`);
   const { timeout, backoff } = htmlGenerationTimeoutConfig;
@@ -27,7 +27,8 @@ const convertToHtml = async (filePath, optimizedPdf = false) => {
   } catch (err) {
     console.error("error while generating html", err);
   }
-  return fs.readFileSync(outputPath, "utf8");
+  return {
+    outputFileName,
+    outputFile: fs.readFileSync(outputPath, "utf8"),
+  };
 };
-
-module.exports = { convertToHtml };

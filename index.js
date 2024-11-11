@@ -1,6 +1,6 @@
-const { convertToHtml } = require("./src/handlers/pdf/convert-to-html");
-const fs = require("fs");
-const { S3Client } = require("@aws-sdk/client-s3");
+import { convertToHtml } from "./src/handlers/pdf/convert-to-html";
+import fs from "fs";
+import { S3Client, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const client = new S3Client({ region: "us-east-1" });
 
@@ -15,7 +15,7 @@ const getFileFromS3 = async (Bucket, Key) => {
   return res.Body;
 };
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   const Key = event.Records[0].s3.object.key;
   const Bucket = event.Records[0].s3.bucket.name;
   console.log("Key: ", Key);

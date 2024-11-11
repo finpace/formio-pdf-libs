@@ -2,7 +2,8 @@
 
 /* eslint-disable no-console */
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 const port = process.env.PDFLIBS_PORT || 8080;
 
@@ -30,7 +31,7 @@ const htmlGenerationTimeoutConfig = {
   backoff: process.env.HTML_GENERATION_BACKOFF ?? 23000
 };
 
-module.exports = {
+export {
   port,
   pdf2htmlexPath,
   psToPdfPath,

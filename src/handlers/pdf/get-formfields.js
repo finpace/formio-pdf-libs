@@ -1,6 +1,4 @@
-'use strict';
-
-const {extractFormfields} = require('../../services/pdf/formfields');
+import { extractFormfields } from '../../services/pdf/formfields';
 
 const getFormfields = async (req, res, next) => {
   try {
@@ -12,4 +10,4 @@ const getFormfields = async (req, res, next) => {
   }
 };
 
-module.exports = {getFormfields};
+export default {getFormfields};

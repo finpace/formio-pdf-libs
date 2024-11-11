@@ -1,6 +1,8 @@
-'use strict';
+import { generateHtml } from './generate-html';
+import { psToPdf } from './ps-to-pdf';
 
-module.exports = {
-  ...require('./generate-html'),
-  ...require('./ps-to-pdf'),
+
+export default {
+  generateHtml,
+  psToPdf,
 };
