@@ -54,14 +54,8 @@ COPY package-lock.json ./
 RUN npm ci
 RUN npm install aws-lambda-ric
 
-# Copy source files
-COPY src ./src
-COPY *.js ./
-COPY *.pdf ./
-
 # Set runtime environment variables
 ENV PDF2HTMLEX_PATH="/usr/local/bin/pdf2htmlEX" \
     PSTOPDF_PATH="/usr/bin/ps2pdf"
 
 ENTRYPOINT ["/usr/local/bin/npx", "aws-lambda-ric"]
-CMD [ "index.handler" ]
