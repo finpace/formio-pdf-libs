@@ -38,6 +38,7 @@ export const handler = async (event) => {
       Bucket,
       Key: Key.replace(".pdf", ".html"),
       Body: outputFile,
+      ContentType: "text/html",
     })
   );
 
