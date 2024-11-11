@@ -25,7 +25,7 @@ const hideFormfieldsPath = process.env.HIDE_FORMFIELDS;
 // that don't need postscript optimization to be optimized in this way, but we also want to
 // stay under common reverse proxy timeout configurations so we don't receive a 504
 const htmlGenerationTimeoutConfig = {
-  timeout: process.env.HTML_GENERATION_TIMEOUT ?? 7000,
+  timeout: process.env.HTML_GENERATION_TIMEOUT ?? 23000,
   backoff: process.env.HTML_GENERATION_BACKOFF ?? 23000
 };
 
