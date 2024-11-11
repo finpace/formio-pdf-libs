@@ -86,3 +86,6 @@ RUN rm -f /etc/apt/sources.list \
     && apt-get autoremove -y  \
     && apt-get remove wget -y \
     && apt-get remove git -y
+
+EXPOSE ${PORT}
+CMD [ "node", "main.js" ]
