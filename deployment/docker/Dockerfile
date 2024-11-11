@@ -63,3 +63,5 @@ ENV PDF2HTMLEX_PATH="/usr/local/bin/pdf2htmlEX" \
     PSTOPDF_PATH="/usr/bin/ps2pdf"
 
 ENTRYPOINT ["/usr/local/bin/npx", "aws-lambda-ric"]
+
+CMD ["index.handler"]
